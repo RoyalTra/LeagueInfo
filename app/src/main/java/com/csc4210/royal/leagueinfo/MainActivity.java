@@ -1,12 +1,16 @@
 package com.csc4210.royal.leagueinfo;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.csc4210.royal.leagueinfo.utilities.ApiConnectivity;
@@ -17,38 +21,45 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    ApiConnectivity api;
-    TextView txt;
-    JSONObject jObject;
-    GridView grid;
-    ImageView[] img_array = new ImageView[Champions_Enum.getSize()];
+    Button btn_champ_list;
+    Button btn_compare_champs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        grid = (GridView) findViewById(R.id.gridView);
-        ImageAdapter imgadapter = new ImageAdapter(this);
-        grid.setAdapter(imgadapter);
+        //Button to go to champion list
+        btn_champ_list = (Button) findViewById(R.id.btn_champions_list);
 
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        btn_champ_list.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //Toast.makeText(MainActivity.this , "" + position,Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, ChampionProfileActivity.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChampionsActivity.class);
+                startActivity(intent);
+            }
+        });
 
-                //Using bundle to pass variable to the next activity
-                Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
+        //Button on click go to compare champions
+        btn_compare_champs = (Button) findViewById(R.id.btn_compare_champs);
 
-                intent.putExtras(bundle);
-
+        btn_compare_champs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CompareChampionsActivity.class);
                 startActivity(intent);
             }
         });
 
 
+        ProgressBar prog = (ProgressBar) findViewById(R.id.progressBar);
+        prog.setVisibility(View.VISIBLE);
+        prog.setMax(100);
+        prog.setProgress(50);
+        prog.setSecondaryProgress(70);
+
     }
+
+
 
 
 

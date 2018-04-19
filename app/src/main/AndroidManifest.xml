@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChampionProfileActivity"></activity>
+        <activity android:name=".ChampionProfileActivity" />
+        <activity android:name=".CompareChampionsActivity" />
+        <activity android:name=".ChampionsActivity"></activity>
     </application>
 
 </manifest>

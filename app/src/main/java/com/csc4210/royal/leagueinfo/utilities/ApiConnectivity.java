@@ -86,6 +86,30 @@ public class ApiConnectivity {
         return jObject;
     }
 
+    public JSONArray getChampMatchUp( String champ, Context context){
+
+        String json = "";
+        JSONArray jArray = null;
+        try{
+            //Getting champ id from assets
+            JReader jReader = new JReader(context);
+            JSONObject object = jReader.getInfoForChamp(champ);
+            String champID =  object.getString("key");
+
+            //Creating Url
+            url = new URL(championGG_url_base + "/" + champID + "/matchup?" + championGG_api_key);
+
+            json = getData(url);
+            jArray = new JSONArray(json);
+
+
+        }catch(Exception e){
+            Log.println(Log.ERROR, "GetChampMatchUp", e.toString());
+        }
+
+        return jArray;
+    }
+
     private String getData(URL u){
         String json = "";
 
