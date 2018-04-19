@@ -1,9 +1,10 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.utilities;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
+
+import com.csc4210.royal.leagueinfo.utilities.JReader;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,7 +15,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Iterator;
 
 
 /**
@@ -34,7 +34,7 @@ public class ApiConnectivity {
 
 
     //Api Related to Champion.gg
-    private String championGG_api_key = "&api_key=?";
+    private String championGG_api_key = "&api_key=5038100c9808ac59e96481f26e2a0587";
     private String championGG_url_base = "http://api.champion.gg/v2/champions";
 
     //Http Related

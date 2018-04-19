@@ -1,4 +1,4 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.champion_fragments;
 
 
 import android.os.AsyncTask;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.csc4210.royal.leagueinfo.utilities.ApiConnectivity;
+import com.csc4210.royal.leagueinfo.R;
 
 import org.json.JSONObject;
 
@@ -34,7 +37,6 @@ public class ChampStatsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,17 +51,13 @@ public class ChampStatsFragment extends Fragment {
     }
 
     private void initializingPage(){
-
-
         //Get ChampID
-
         JSONObject champion = api.getChampStats(champ_name, "champData=winRate,kda,positions",getActivity());
 
         Iterator iterator = champion.keys();
         ViewGroup.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         while(iterator.hasNext()){
             String key = (String) iterator.next();
-
 
             try {
                 TextView textView = new TextView(view.getContext());
@@ -69,11 +67,8 @@ public class ChampStatsFragment extends Fragment {
                 linear_layout.addView(textView);
             }catch(Exception e){
                 Log.println(Log.ERROR, "While loop", key);
-
             }
-
         }
-
     }
 
     private class AsyncTaskRunner extends AsyncTask<String, String, JSONObject> {

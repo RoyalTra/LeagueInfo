@@ -1,4 +1,4 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.utilities;
 
 
 import android.os.Bundle;
@@ -6,6 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
+
+import com.csc4210.royal.leagueinfo.champion_fragments.AbilitiesFragment;
+import com.csc4210.royal.leagueinfo.champion_fragments.AllyFragment;
+import com.csc4210.royal.leagueinfo.champion_fragments.ChampFragment;
+import com.csc4210.royal.leagueinfo.champion_fragments.ChampStatsFragment;
+import com.csc4210.royal.leagueinfo.champion_fragments.EnemyFragment;
 
 /**
  * Created by Royal on 4/15/2018.
@@ -15,10 +21,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
     public String champName;
 
+    private FragmentManager fragmentManager;
     public PagerAdapter(FragmentManager fm, int NumOfTabs, String champ) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        Log.println(Log.ERROR, "Pageadapter", Integer.toString(NumOfTabs));
         this.champName = champ;
+        this.fragmentManager = fm;
     }
 
     @Override
@@ -26,32 +35,32 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment frag;
         Bundle bun = new Bundle();
         bun.putString("champ_name", champName);
-        Log.println(Log.ERROR,"Position",Integer.toString(position));
         switch (position) {
             case 0:
                 frag = new ChampFragment();
                 frag.setArguments(bun);
-                return frag;
+                break;
             case 1:
                 frag = new ChampStatsFragment();
                 frag.setArguments(bun);
-                return frag;
+                break;
             case 2:
                 frag = new AbilitiesFragment();
                 frag.setArguments(bun);
-                return frag;
+                break;
             case 3:
                 frag = new AllyFragment();
                 frag.setArguments(bun);
-                return frag;
+                break;
             case 4:
                 frag = new EnemyFragment();
                 frag.setArguments(bun);
-                return frag;
+                break;
             default:
                 return null;
         }
 
+        return frag;
     }
 
     @Override
@@ -63,7 +72,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return "Stats";
             case 2:
-                return "Abilities";
+                return "Ability";
             case 3:
                 return "Ally";
             case 4:

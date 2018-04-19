@@ -1,10 +1,6 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.champion_fragments;
 
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,9 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
+import com.csc4210.royal.leagueinfo.utilities.JReader;
+import com.csc4210.royal.leagueinfo.R;
 
-import java.io.InputStream;
+import org.json.JSONObject;
 
 
 /**

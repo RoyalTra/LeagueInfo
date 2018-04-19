@@ -1,15 +1,13 @@
 package com.csc4210.royal.leagueinfo;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.FrameLayout;
+
+import com.csc4210.royal.leagueinfo.utilities.Champions_Enum;
+import com.csc4210.royal.leagueinfo.utilities.PagerAdapter;
 
 public class ChampionProfileActivity extends AppCompatActivity {
 
@@ -53,11 +51,12 @@ public class ChampionProfileActivity extends AppCompatActivity {
         TabLayout.Tab enemy = tabLayout.newTab();
         tabLayout.addTab(enemy);
 
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), champName);
-        Log.println(Log.ERROR, "Tab", Integer.toString(tabLayout.getTabCount()));
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), champName);
+        viewPager.setOffscreenPageLimit(5);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
     }
 
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.csc4210.royal.leagueinfo.EnemyFragment">
+    tools:context="com.csc4210.royal.leagueinfo.champion_fragments.EnemyFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

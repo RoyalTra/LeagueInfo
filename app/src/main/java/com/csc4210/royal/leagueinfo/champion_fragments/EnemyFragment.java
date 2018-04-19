@@ -1,4 +1,4 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.champion_fragments;
 
 
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.csc4210.royal.leagueinfo.utilities.JReader;
+import com.csc4210.royal.leagueinfo.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

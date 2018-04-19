@@ -1,4 +1,4 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.utilities;
 
 import java.io.IOException;
 import java.io.InputStream;

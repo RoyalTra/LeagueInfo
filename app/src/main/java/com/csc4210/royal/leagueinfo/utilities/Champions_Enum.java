@@ -1,4 +1,4 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.utilities;
 
 /**
  * Created by Royal on 4/13/2018.

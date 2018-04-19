@@ -1,24 +1,19 @@
 package com.csc4210.royal.leagueinfo;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.csc4210.royal.leagueinfo.utilities.ApiConnectivity;
+import com.csc4210.royal.leagueinfo.utilities.Champions_Enum;
+import com.csc4210.royal.leagueinfo.utilities.ImageAdapter;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 

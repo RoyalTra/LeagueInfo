@@ -1,4 +1,4 @@
-package com.csc4210.royal.leagueinfo;
+package com.csc4210.royal.leagueinfo.utilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-
-import org.json.JSONObject;
 
 import java.io.InputStream;
 
@@ -53,7 +51,7 @@ public class ImageAdapter extends BaseAdapter {
 
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(context);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(150, 150));
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(315, 315));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         } else {
@@ -65,11 +63,6 @@ public class ImageAdapter extends BaseAdapter {
         imageView.setImageResource(id);
         return imageView;
     }
-
-
-
-
-
 
     //Used to download an image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap>{
@@ -84,7 +77,6 @@ public class ImageAdapter extends BaseAdapter {
             String urldisplay = urls[0];
             Bitmap bMap = null;
             try{
-
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 bMap = BitmapFactory.decodeStream(in);
                 Log.println(Log.ERROR, "Bitmap Count",urls[0] );
@@ -96,7 +88,7 @@ public class ImageAdapter extends BaseAdapter {
 
         @Override
         protected void onPostExecute(Bitmap result){
-            bmImage.setImageBitmap(getResizedBitmap(result, 120,120));
+            bmImage.setImageBitmap(result);
         }
 
         public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
