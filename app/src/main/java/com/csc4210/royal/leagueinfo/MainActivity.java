@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.csc4210.royal.leagueinfo.utilities.ApiConnectivity;
 import com.csc4210.royal.leagueinfo.utilities.Champions_Enum;
 import com.csc4210.royal.leagueinfo.utilities.ImageAdapter;
+import com.csc4210.royal.leagueinfo.utilities.JReader;
 
 import org.json.JSONObject;
 
@@ -45,17 +47,14 @@ public class MainActivity extends AppCompatActivity {
         btn_compare_champs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CompareChampionsActivity.class);
+                Intent intent = new Intent(MainActivity.this, SearchForMatchUpsActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        ProgressBar prog = (ProgressBar) findViewById(R.id.progressBar);
-        prog.setVisibility(View.VISIBLE);
-        prog.setMax(100);
-        prog.setProgress(50);
-        prog.setSecondaryProgress(70);
+
+//
 
     }
 

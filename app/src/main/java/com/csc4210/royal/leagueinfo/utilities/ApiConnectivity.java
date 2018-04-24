@@ -50,13 +50,14 @@ public class ApiConnectivity {
 
     //Json object
     JSONObject jObject;
-
+    JSONArray jObj;
+    JSONArray jArray;
     public ApiConnectivity(){
 
     }
 
     //Champion.gg api call
-    public JSONObject getChampStats(String champ, String params, Context context){
+    public JSONArray getChampStats(String champ, String params, Context context){
 
         String json = "";
 
@@ -70,12 +71,12 @@ public class ApiConnectivity {
 
              url = new URL(championGG_url_base + "/" + champID + "?" +  params + championGG_api_key) ;
 
-            //Log.println(Log.ERROR,"Get Url", url.toString());
+            Log.println(Log.ERROR,"Get Url", url.toString());
             json = getData(url);
 
-            JSONArray jObj = new JSONArray(json);
+            jObj = new JSONArray(json);
 
-            jObject = (JSONObject) jObj.get(0);
+            //jObject = (JSONObject) jObj.get(0);
 
         }catch(Exception e){
             Log.println(Log.ERROR, "Api Get Stats:", e.toString());
@@ -83,25 +84,29 @@ public class ApiConnectivity {
 
         }
 
-        return jObject;
+        return jObj;
     }
 
-    public JSONArray getChampMatchUp( String champ, Context context){
+    public JSONArray getChampMatchUp( String champ){
 
         String json = "";
-        JSONArray jArray = null;
+
+        int champID = Champions_Enum.Champ.valueOf(champ).getId();
+        Log.println(Log.ERROR, "URL", championGG_url_base + "/" + champID + "/matchups?" + championGG_api_key);
+
         try{
             //Getting champ id from assets
-            JReader jReader = new JReader(context);
-            JSONObject object = jReader.getInfoForChamp(champ);
-            String champID =  object.getString("key");
+//            JReader jReader = new JReader(context);
+//            JSONObject object = jReader.getInfoForChamp(champ);
+//            String champID =  object.getString("key");
+
 
             //Creating Url
-            url = new URL(championGG_url_base + "/" + champID + "/matchup?" + championGG_api_key);
+            url = new URL(championGG_url_base + "/" + champID + "/matchups?" + championGG_api_key);
 
             json = getData(url);
             jArray = new JSONArray(json);
-
+            Log.println(Log.ERROR,"jarray", jArray.toString());
 
         }catch(Exception e){
             Log.println(Log.ERROR, "GetChampMatchUp", e.toString());

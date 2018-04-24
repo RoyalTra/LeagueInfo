@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".ChampionProfileActivity" />
         <activity android:name=".CompareChampionsActivity" />
-        <activity android:name=".ChampionsActivity"></activity>
+        <activity android:name=".ChampionsActivity" />
+        <activity android:name=".SearchForMatchUpsActivity"></activity>
     </application>
 
 </manifest>

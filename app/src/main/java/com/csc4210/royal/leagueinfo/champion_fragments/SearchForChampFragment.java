@@ -1,6 +1,7 @@
 package com.csc4210.royal.leagueinfo.champion_fragments;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -51,16 +52,16 @@ public class SearchForChampFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, champions );
         actv.setThreshold(1);
         actv.setAdapter(adapter);
-        final CompareChampionFragment champ = new CompareChampionFragment();
 
 
         btn_champ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CompareChampionsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("champ_name", actv.getText().toString());
-                champ.setArguments(bundle);
-                CompareChampionsActivity.fragmentManager.beginTransaction().replace(getArguments().getInt("frame"), champ ).commit();
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
         });
@@ -82,10 +83,9 @@ public class SearchForChampFragment extends Fragment {
         protected void onPostExecute(FrameLayout result){
 
 
-            getChildFragmentManager().beginTransaction().replace( result.getId(), new CompareChampionFragment()).commit();
-
         }
 
     }
+
 
 }
