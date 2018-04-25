@@ -87,22 +87,20 @@ public class ApiConnectivity {
         return jObj;
     }
 
-    public JSONArray getChampMatchUp( String champ){
+    public JSONArray getChampMatchUp( String champ, String role){
 
         String json = "";
+
+        if(role == "/")
+            role = "";
 
         int champID = Champions_Enum.Champ.valueOf(champ).getId();
         Log.println(Log.ERROR, "URL", championGG_url_base + "/" + champID + "/matchups?" + championGG_api_key);
 
         try{
-            //Getting champ id from assets
-//            JReader jReader = new JReader(context);
-//            JSONObject object = jReader.getInfoForChamp(champ);
-//            String champID =  object.getString("key");
-
 
             //Creating Url
-            url = new URL(championGG_url_base + "/" + champID + "/matchups?" + championGG_api_key);
+            url = new URL(championGG_url_base + "/" + champID + "/MIDDLE"   + "/matchups?" + championGG_api_key);
 
             json = getData(url);
             jArray = new JSONArray(json);

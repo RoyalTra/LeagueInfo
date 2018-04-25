@@ -53,7 +53,6 @@ public class SearchForChampFragment extends Fragment {
         actv.setThreshold(1);
         actv.setAdapter(adapter);
 
-
         btn_champ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +67,6 @@ public class SearchForChampFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-
 
     public class RunTaskAsync extends AsyncTask<FrameLayout, Void, FrameLayout> {
         //Process Thats done in the back ground

@@ -52,17 +52,13 @@ public class ComparePager extends FragmentStatePagerAdapter {
         try {
 
             bun.putInt("champ_one_id", champ.getInt("champ1_id") );
-            Log.println(Log.ERROR, "Champ one id",bun.getInt("champ2_id") + "");
             bun.putInt("champ_two_id", champ.getInt("champ2_id") );
-            Log.println(Log.ERROR, "Champ two id",bun.getInt("champ2_id") + "" );
 
             JSONObject champ1 = (JSONObject) champ.getJSONObject("champ1");
             JSONObject champ2 = (JSONObject) champ.getJSONObject("champ2");
 
             for(String str :data) {
-                Log.println(Log.ERROR,str + "1", champ1.getString(str));
-                Log.println(Log.ERROR,str + "2", champ2.getString(str));
-                bun.putString(str + "1", champ1.getString(str));
+               bun.putString(str + "1", champ1.getString(str));
                 bun.putString(str + "2", champ2.getString(str));
             }
 
@@ -74,15 +70,15 @@ public class ComparePager extends FragmentStatePagerAdapter {
 
         switch(position){
             case 0:  return frag = ComparedChampionsFragment.newInstance(bun);
-            case 1: return frag = ComparedChampionsFragment.newInstance(bun);
-            case 2: return frag = ComparedChampionsFragment.newInstance(bun);
-            case 3: return frag = ComparedChampionsFragment.newInstance(bun);
+            case 1:  return frag = ComparedChampionsFragment.newInstance(bun);
+            case 2:  return frag = ComparedChampionsFragment.newInstance(bun);
+            case 3:  return frag = ComparedChampionsFragment.newInstance(bun);
             case 4:  return frag = ComparedChampionsFragment.newInstance(bun);
-            case 5: return frag =ComparedChampionsFragment.newInstance(bun);
-            case 6: return frag = ComparedChampionsFragment.newInstance(bun);
-            case 7: return frag =ComparedChampionsFragment.newInstance(bun);
-            case 8:  return frag =ComparedChampionsFragment.newInstance(bun);
-            case 9: return frag = ComparedChampionsFragment.newInstance(bun);
+            case 5:  return frag = ComparedChampionsFragment.newInstance(bun);
+            case 6:  return frag = ComparedChampionsFragment.newInstance(bun);
+            case 7:  return frag = ComparedChampionsFragment.newInstance(bun);
+            case 8:  return frag = ComparedChampionsFragment.newInstance(bun);
+            case 9:  return frag = ComparedChampionsFragment.newInstance(bun);
 
             default: return null;
         }
@@ -92,14 +88,8 @@ public class ComparePager extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position)  {
         // Generate title based on item position
-        JSONObject champ = (JSONObject) champs.get(position);
-        String str;
-        try {
-             str = champ.getString("champ1_id");
-        }catch(Exception e){
-            return null;
-        }
-        return position + "";
+
+        return (position + 1) + "";
     }
 
     @Override

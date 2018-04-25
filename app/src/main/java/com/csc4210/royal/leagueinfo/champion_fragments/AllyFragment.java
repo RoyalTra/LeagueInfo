@@ -3,9 +3,11 @@ package com.csc4210.royal.leagueinfo.champion_fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.csc4210.royal.leagueinfo.utilities.JReader;
@@ -22,10 +24,8 @@ public class AllyFragment extends Fragment {
 
     View view;
     String champ_name;
-    TextView txt_tip1;
-    TextView txt_tip2;
-    TextView txt_tip3;
 
+    LinearLayout linearLayout;
     public AllyFragment() {
         // Required empty public constructor
     }
@@ -40,11 +40,7 @@ public class AllyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_ally, container, false);
-
-
-        txt_tip1 = (TextView) view.findViewById(R.id.txt_tip1);
-        txt_tip2 = (TextView) view.findViewById(R.id.txt_tip2);
-        txt_tip3 = (TextView) view.findViewById(R.id.txt_tip3);
+        linearLayout = (LinearLayout) view.findViewById(R.id.linear_layout);
 
         champ_name = getArguments().getString("champ_name");
 
@@ -55,19 +51,26 @@ public class AllyFragment extends Fragment {
 
     //Initializing page from retrieved json data
     public void init(){
-        TextView txt[] = {txt_tip1, txt_tip2, txt_tip3};
         JReader jreader = new JReader(getContext());
         JSONObject champ = (JSONObject) jreader.getInfoForChamp(champ_name);
 
         try{
             JSONArray tips = champ.getJSONArray("allytips");
+            int i = 0;
+            while(tips.get(i) != null){
 
-                for(int i = 0; i < 3 ; i++ ){
-                    txt[i].setText(tips.getString(i));
-                }
+                TextView tv = new TextView(getContext());
+                tv.setText(tips.getString(i));
+                tv.setPadding(10,30,10,10);
+                tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+                linearLayout.addView(tv);
+
+                i++;
+            }
 
         }catch(Exception e){
-
+            Log.println(Log.ERROR, "Ally", e.toString());
         }
     }
 

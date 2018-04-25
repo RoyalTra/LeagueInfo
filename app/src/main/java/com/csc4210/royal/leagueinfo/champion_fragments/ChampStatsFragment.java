@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.constraint.Constraints;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -94,12 +95,13 @@ public class ChampStatsFragment extends Fragment {
                     TextView textView = new TextView(view.getContext());
                     textView.setPadding(20, 20, 20, 20);
                     textView.setLayoutParams(lParams);
-                    textView.setText(name.toUpperCase() + ":\t");
+                    textView.setText(name.toUpperCase() + ":\t" + Double.toString(champion.getDouble(name)).substring(0, 5
+                    ) + "%");
 
                     ProgressBar progressBar = new ProgressBar(view.getContext(), null, android.R.attr.progressBarStyleHorizontal);
-                    progressBar.setMax(100);
-                    progressBar.setLayoutParams(new LinearLayout.LayoutParams(100, 50));
-                    progressBar.setProgress((int) (champion.getDouble(name) * 100));
+                    progressBar.setMax(1000);
+                    progressBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 50));
+                    progressBar.setProgress((int) ((champion.getDouble(name) * 1000)));
                     progressBar.getProgressDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
 
                     horizontal.addView(textView);

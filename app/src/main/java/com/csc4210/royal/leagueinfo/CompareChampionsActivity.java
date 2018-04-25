@@ -1,39 +1,22 @@
 package com.csc4210.royal.leagueinfo;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.app.Activity;
-import android.content.Context;
 
-import com.csc4210.royal.leagueinfo.champion_fragments.CompareChampionFragment;
-import com.csc4210.royal.leagueinfo.champion_fragments.SearchForChampFragment;
+import android.widget.FrameLayout;
+
 import com.csc4210.royal.leagueinfo.utilities.ApiConnectivity;
 import com.csc4210.royal.leagueinfo.utilities.Champions_Enum;
 import com.csc4210.royal.leagueinfo.utilities.ComparePager;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -52,7 +35,7 @@ public class CompareChampionsActivity extends AppCompatActivity {
 
     String champ_name;
     Context context;
-
+    String role;
     public  FragmentManager fragmentManager;
 
     public static ArrayList<JSONObject> matchups;
@@ -68,8 +51,7 @@ public class CompareChampionsActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         champ_name = bundle.getString("champ_name");
-
-
+        role = bundle.getString("role");
 
         new AsyncTaskRunner().execute(CompareChampionsActivity.this);
 
@@ -91,7 +73,7 @@ public class CompareChampionsActivity extends AppCompatActivity {
 
             try {
 
-               JSONArray ja = api.getChampMatchUp(champ_name);
+               JSONArray ja = api.getChampMatchUp(champ_name, "/" + role );
                Log.println(Log.ERROR,"Return", ja.toString());
 
                return ja;
