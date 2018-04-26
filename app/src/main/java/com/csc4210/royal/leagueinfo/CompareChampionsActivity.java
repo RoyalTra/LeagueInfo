@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.csc4210.royal.leagueinfo.utilities.ApiConnectivity;
 import com.csc4210.royal.leagueinfo.utilities.Champions_Enum;
@@ -60,6 +62,14 @@ public class CompareChampionsActivity extends AppCompatActivity {
 
 
     public class AsyncTaskRunner extends AsyncTask<Context, String, JSONArray> {
+        ProgressBar loading;
+
+        @Override
+        protected void onPreExecute(){
+            loading = new ProgressBar(getApplicationContext());
+            viewPager.addView(loading);
+            loading.setIndeterminate(true);
+        }
 
 
         //Process Thats done in the back ground
@@ -78,6 +88,8 @@ public class CompareChampionsActivity extends AppCompatActivity {
 
                return ja;
             }catch(Exception e){
+
+
                 Log.println(Log.ERROR, "Array", e.toString());
             }
 
@@ -89,7 +101,6 @@ public class CompareChampionsActivity extends AppCompatActivity {
         protected void onPostExecute(JSONArray result){
 
             ArrayList<JSONObject> matchups = new ArrayList();
-            Log.println(Log.ERROR,"Return", result.toString());
 
             try{
                 int i = 0;
@@ -103,9 +114,13 @@ public class CompareChampionsActivity extends AppCompatActivity {
                 }
             }catch (Exception e){
                 Log.println(Log.ERROR,"Champion Assign:", e.toString());
+                Toast toast = Toast.makeText(getApplicationContext(),"Please make sure your connected to internet.\nStats and Comparision wont work other wise.", Toast.LENGTH_LONG);
+                toast.show();
             }
 
 
+            loading.setIndeterminate(false);
+            viewPager.removeView(loading);
 
             Log.println(Log.ERROR, "BeforeAssignAdapter", "hitting");
             compareAdapter = new ComparePager(getSupportFragmentManager(),matchups.size(),matchups);

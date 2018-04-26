@@ -3,6 +3,7 @@ package com.csc4210.royal.leagueinfo.utilities;
 import android.content.Context;
 import android.util.JsonReader;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.csc4210.royal.leagueinfo.utilities.JReader;
 
@@ -132,7 +133,7 @@ public class ApiConnectivity {
 
 
         }catch(Exception e){
-            Log.println(Log.ERROR,"get data:", e.toString());
+
         }finally {
 
             urlDisconnect();

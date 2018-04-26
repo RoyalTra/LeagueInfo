@@ -73,7 +73,14 @@ public class ComparedChampionsFragment extends Fragment {
     }
 
     public class AsyncTaskRunner extends AsyncTask<String, String, ArrayList> {
+        ProgressBar loading;
 
+        @Override
+        protected void onPreExecute(){
+            loading = new ProgressBar(getContext());
+            linearLayout.addView(loading);
+            loading.setIndeterminate(true);
+        }
 
         //Process Thats done in the back ground
         @Override
@@ -129,13 +136,13 @@ public class ComparedChampionsFragment extends Fragment {
                 ProgressBar progressBar1 = new ProgressBar(view.getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 progressBar1.setRotation(180);
                 progressBar1.setMax(1000);
-                progressBar1.setLayoutParams(new LinearLayout.LayoutParams(200, 50));
+                progressBar1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 50));
                 progressBar1.setProgress(  (int) (Double.parseDouble( getArguments().getString(str + "1")) * 1000) );
                 progressBar1.getProgressDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
 
                 ProgressBar progressBar2 = new ProgressBar(view.getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 progressBar2.setMax(1000);
-                progressBar2.setLayoutParams(new LinearLayout.LayoutParams(200, 50));
+                progressBar2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 50));
                 progressBar2.setProgress( (int) (Double.parseDouble( getArguments().getString(str + "2")) * 1000));
                 progressBar2.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
@@ -157,6 +164,9 @@ public class ComparedChampionsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList result){
+            loading.setIndeterminate(false);
+            linearLayout.removeView(loading);
+
             String champ_one = Champions_Enum.getNameById(getArguments().getInt("champ_one_id"));
             img_champ_one.setImageResource(getActivity().getResources().getIdentifier(champ_one.toLowerCase(),"drawable",getActivity().getPackageName()));
             Log.println(Log.ERROR,"Champ_one_id", champ_one);

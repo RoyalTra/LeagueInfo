@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.csc4210.royal.leagueinfo.utilities.ApiConnectivity;
 import com.csc4210.royal.leagueinfo.R;
@@ -62,18 +63,30 @@ public class ChampStatsFragment extends Fragment {
 
     private class AsyncTaskRunner extends AsyncTask<Integer, String, ArrayList> {
 
+        ProgressBar loading;
+
+        @Override
+        protected void onPreExecute(){
+            loading = new ProgressBar(getContext());
+            linear_layout.addView(loading);
+            loading.setIndeterminate(true);
+        }
 
         protected ArrayList doInBackground(Integer... params) {
 
             String[] data = {"role", "winRate", "kills", "assists", "playRate", "gamesPlayed", "deaths", "banRate"};
 
-            JSONArray champions = api.getChampStats(champ_name, "champData=winRate,kda,positions", getActivity());
+            JSONArray champions;
             JSONObject champion = null;
 
             try {
+                champions = api.getChampStats(champ_name, "champData=winRate,kda,positions", getActivity());
+
                 champion = champions.getJSONObject(params[0]);
             } catch (JSONException e) {
+
                 Log.println(Log.ERROR, "json Ex", e.toString());
+
                 e.printStackTrace();
             }
 
@@ -112,6 +125,7 @@ public class ChampStatsFragment extends Fragment {
 
                 } catch (Exception e) {
                     Log.println(Log.ERROR, "While loop", name);
+
                 }
             }
             return list;
@@ -119,9 +133,17 @@ public class ChampStatsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList result) {
+            loading.setIndeterminate(false);
+            linear_layout.removeView(loading);
 
-            for (Object tv : result.toArray())
-                linear_layout.addView((LinearLayout) tv);
+            if(result.get(0) == null){
+                Toast toast = Toast.makeText(getContext(),"Please make sure your connected to internet.\nStats and Comparision wont work other wise.", Toast.LENGTH_LONG);
+                toast.show();
+
+            }else {
+                for (Object tv : result.toArray())
+                    linear_layout.addView((LinearLayout) tv);
+            }
         }
 
     }
