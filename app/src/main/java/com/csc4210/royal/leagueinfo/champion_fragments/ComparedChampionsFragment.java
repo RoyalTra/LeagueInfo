@@ -136,13 +136,13 @@ public class ComparedChampionsFragment extends Fragment {
                 ProgressBar progressBar1 = new ProgressBar(view.getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 progressBar1.setRotation(180);
                 progressBar1.setMax(1000);
-                progressBar1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 50));
+                progressBar1.setLayoutParams(new LinearLayout.LayoutParams(100, 50));
                 progressBar1.setProgress(  (int) (Double.parseDouble( getArguments().getString(str + "1")) * 1000) );
                 progressBar1.getProgressDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
 
                 ProgressBar progressBar2 = new ProgressBar(view.getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 progressBar2.setMax(1000);
-                progressBar2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 50));
+                progressBar2.setLayoutParams(new LinearLayout.LayoutParams(100, 50));
                 progressBar2.setProgress( (int) (Double.parseDouble( getArguments().getString(str + "2")) * 1000));
                 progressBar2.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
